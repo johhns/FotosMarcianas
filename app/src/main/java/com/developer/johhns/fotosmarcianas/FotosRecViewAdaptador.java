@@ -22,15 +22,18 @@ public class FotosRecViewAdaptador extends RecyclerView.Adapter<FotosRecViewAdap
     List<FotoDeMarte>   fotos ;
     //GridViewItemBinding binding ;
     Context             context ;
-    FotosViewModel      viewModel;
 
 
-    public FotosRecViewAdaptador( Context contexto ) {
+
+    public FotosRecViewAdaptador( Context contexto , List<FotoDeMarte> fotos) {
         this.fotos     = fotos ;
         this.context   = contexto ;
-        this.viewModel = new FotosViewModel() ;
-        this.fotos     = (List<FotoDeMarte>)  viewModel.fotos() ;
     }
+
+   public void actualizarFotos( List<FotoDeMarte> fotos ){
+      this.fotos = fotos ;
+      this.notifyDataSetChanged();
+   }
 
     @NonNull
     @Override

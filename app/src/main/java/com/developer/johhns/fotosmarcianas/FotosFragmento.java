@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 
@@ -16,9 +17,10 @@ import java.util.List;
 
 public class FotosFragmento extends Fragment {
 
-    FotosFragBinding binding   ;
+    FotosFragBinding      binding   ;
     FotosRecViewAdaptador adaptador ;
-    FotosViewModel        viewModel = new FotosViewModel();
+    FotosViewModel        viewModel ;
+    List<FotoDeMarte>     fotos     ;
 
     public FotosFragmento() {
 
@@ -37,10 +39,22 @@ public class FotosFragmento extends Fragment {
         viewModel = new ViewModelProvider(this ).get(FotosViewModel.class) ;
 
         binding   = FotosFragBinding.inflate( inflater , container , false );
-        adaptador = new FotosRecViewAdaptador( container.getContext() ) ;
+        adaptador = new FotosRecViewAdaptador( container.getContext() , fotos ) ;
         binding.fotosGrid.setAdapter( adaptador );
         binding.fotosGrid.setLayoutManager( new GridLayoutManager( container.getContext() , 2 ));
+
+        viewModel.getFotos().observe(this, new Observer<List<FotoDeMarte>>() {
+            @Override
+            public void onChanged(List<FotoDeMarte> fotoDeMartes) {
+               if ( fotoDeMartes != null ) {
+                   fotoDeMartes = fotoDeMartes ;
+                   adaptador.actualizarFotos( fotoDeMartes );
+               }
+            }
+        });
+
         View vista = binding.getRoot() ;
+
         return vista ;
 
 

@@ -23,11 +23,11 @@ public class FotosViewModel extends ViewModel {
         _fotos = new MutableLiveData<List<FotoDeMarte>>();
     }
 
-    public LiveData<MarteApiEstado> estado(){
+    public MutableLiveData<MarteApiEstado> getEstado(){
         return _estado ;
     }
 
-    public LiveData<List<FotoDeMarte>> fotos(){
+    public MutableLiveData<List<FotoDeMarte>> getFotos(){
         return _fotos ;
     }
 
@@ -40,13 +40,13 @@ public class FotosViewModel extends ViewModel {
         fotoResponseCall.enqueue(new Callback<List<FotoDeMarte>>() {
             @Override
             public void onResponse(Call<List<FotoDeMarte>> call, Response<List<FotoDeMarte>> response) {
-                _fotos.setValue( response.body() );
-                _estado.setValue( MarteApiEstado.DONE );
+                _fotos.postValue( response.body() );
+                _estado.postValue( MarteApiEstado.DONE );
             }
 
             @Override
             public void onFailure(Call<List<FotoDeMarte>> call, Throwable t) {
-                _estado.setValue( MarteApiEstado.ERROR );
+                _estado.postValue( MarteApiEstado.ERROR );
                 Log.i("VEW-MODEL","ERROR *****************************************");
             }
         });

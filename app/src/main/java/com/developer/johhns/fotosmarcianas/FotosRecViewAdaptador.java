@@ -1,5 +1,6 @@
 package com.developer.johhns.fotosmarcianas;
 
+
 import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -30,10 +31,10 @@ public class FotosRecViewAdaptador extends RecyclerView.Adapter<FotosRecViewAdap
         this.context   = contexto ;
     }
 
-   public void actualizarFotos( List<FotoDeMarte> fotos ){
-      this.fotos = fotos ;
-      this.notifyDataSetChanged();
-   }
+    public void actualizarFotos( List<FotoDeMarte> fotos ){
+        this.fotos = fotos ;
+        this.notifyDataSetChanged();
+    }
 
     @NonNull
     @Override
@@ -45,10 +46,10 @@ public class FotosRecViewAdaptador extends RecyclerView.Adapter<FotosRecViewAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-       Picasso.with(context.getApplicationContext())
-              .load( fotos.get(position).urlImagen )
-              .placeholder(R.drawable.ic_broken_image)
-              .into( holder.foto );
+        Picasso.with(context.getApplicationContext())
+                .load( fotos.get(position).urlImagen )
+                .placeholder(R.drawable.ic_broken_image)
+                .into( holder.foto );
     }
 
     @Override

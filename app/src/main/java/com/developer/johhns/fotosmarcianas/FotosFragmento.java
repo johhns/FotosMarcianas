@@ -23,7 +23,6 @@ public class FotosFragmento extends Fragment {
     List<FotoDeMarte>     fotos     ;
 
     public FotosFragmento() {
-
     }
 
 
@@ -35,29 +34,32 @@ public class FotosFragmento extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        viewModel = new ViewModelProvider(this ).get(FotosViewModel.class) ;
-
+        fotos     = new ArrayList<>() ;
         binding   = FotosFragBinding.inflate( inflater , container , false );
         adaptador = new FotosRecViewAdaptador( container.getContext() , fotos ) ;
         binding.fotosGrid.setAdapter( adaptador );
         binding.fotosGrid.setLayoutManager( new GridLayoutManager( container.getContext() , 2 ));
-
-        viewModel.getFotos().observe(this, new Observer<List<FotoDeMarte>>() {
-            @Override
-            public void onChanged(List<FotoDeMarte> fotoDeMartes) {
-               if ( fotoDeMartes != null ) {
-                   fotoDeMartes = fotoDeMartes ;
-                   adaptador.actualizarFotos( fotoDeMartes );
-               }
-            }
-        });
-
         View vista = binding.getRoot() ;
 
+        viewModel = new ViewModelProvider(this ).get(FotosViewModel.class) ;
+        viewModel.getFotos().observe(getViewLifecycleOwner(), new Observer<List<FotoDeMarte>>() {
+            @Override
+            public void onChanged(List<FotoDeMarte> fotoDeMartes) {
+                if ( fotoDeMartes != null ) {
+                    fotos= fotoDeMartes ;
+                    adaptador.actualizarFotos( fotoDeMartes );
+                }
+            }
+        });
+        viewModel.obtenerlasFotosDeMarte();
+
         return vista ;
-
-
-      //  return inflater.inflate(R.layout.fotos_frag, container, false);
     }
+    public void actualizarFragmento( List<FotoDeMarte> fotos ){
+        this.fotos = fotos ;
+        adaptador.actualizarFotos( this.fotos );
+    }
+
+
+
 }

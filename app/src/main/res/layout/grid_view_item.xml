@@ -1,26 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="200dp"
+    android:orientation="vertical"
     >
-<!--
-    <data>
-        <variable
-            name="foto"
-            type="com.developer.johhns.fotosmarcianas.FotoDeMarte" />
-    </data>
-    app:imageUrl="@{foto.urlImagen}"
--->
+
+    <!--
+    <layout
+        <data>
+            <variable
+                name="foto"
+                type="com.developer.johhns.fotosmarcianas.FotoDeMarte" />
+        </data>
+    -->
+
+
     <ImageView
         android:id="@+id/mars_image"
-        android:layout_width="wrap_content"
-        android:layout_height="170dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:scaleType="fitXY"
         android:adjustViewBounds="true"
         android:padding="2dp"
-        tools:src="@tools:sample/backgrounds/scenic"/>
+        tools:src="@tools:sample/backgrounds/scenic"
+        />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:gravity="bottom|center|center_horizontal|center_vertical"
+        android:text="Titulo"
+        android:textColor="#FFFFFF"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        />
 
+</FrameLayout>
+
+ <!-- </layout> -->

@@ -40,7 +40,7 @@ public class FotosViewModel extends ViewModel {
         Log.i("VIEW-MODEL","INICIANDO RETROFIT *********************");
         _estado.setValue(MarteApiEstado.LOADING);
         FotosApiAdaptador adaptador = new FotosApiAdaptador();
-        FotosInterfaseApi endpoint =adaptador.establecerConexion() ;
+        FotosInterfaseApi endpoint  = adaptador.establecerConexion() ;
         Call<List<FotoDeMarte>> fotoResponseCall = endpoint.obtenerFotos() ;
         fotoResponseCall.enqueue(new Callback<List<FotoDeMarte>>() {
             @Override
@@ -49,6 +49,8 @@ public class FotosViewModel extends ViewModel {
                 _fotos.postValue( response.body() );
                 _estado.postValue( MarteApiEstado.DONE );
                 Log.i("VIEW-MODEL","FIN DE RESPONSE RETROFIT : " + response.body().size() ) ;
+                Log.i("VIEW-MODEL","0  : " + response.body().get(0).img_src ) ;
+                Log.i("VIEW-MODEL","1  : " + response.body().get(1).img_src ) ;
             }
 
             @Override
